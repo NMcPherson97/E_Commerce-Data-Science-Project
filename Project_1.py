@@ -15,19 +15,30 @@ category_profit = sales_data.groupby('Category')['Profit'].sum()
 
 #Profit margin column creation
 sales_data['Profit_Margin'] = sales_data['Profit'] / sales_data['Sales']
+
 #Profit per unit column creation
 sales_data['Profit_Per_Unit'] = sales_data['Profit'] / sales_data['Quantity']
 
 #date column conversion and quarter column creation
 sales_data['Order Date'] = pd.to_datetime(sales_data['Order Date'])
 sales_data['MM-DD'] = sales_data['Order Date'].dt.strftime('%m-%d')
-month_day = pd.to_datetime(sales_data['MM-DD'])
-sales_data['Quarter'] = month_day.dt.quarter
-print(sales_data.head(10))
+
+#Rename 'MM-DD' to 'Quarter' and convert datatype
+sales_data = sales_data.rename(columns = {'MM-DD':'Quarter'})
+sales_data['Quarter'] = sales_data['Quarter'].str.replace('-','.').astype('float')
+print(sales_data['Quarter'])
+
 
 
 #quarterly tables
-
+# quarter1 = sales_data[(sales_data['Quarter'] >= 1) & (sales_data['Quarter'] < 4)].reset_index()
+# quarter2 = sales_data[(sales_data['Quarter'] >= 4) & (sales_data['Quarter'] < 6)].reset_index()
+# quarter3 = sales_data[(sales_data['Quarter'] >= 6) & (sales_data['Quarter'] < 9)].reset_index()
+# quarter4 = sales_data[(sales_data['Quarter'] >= 9) & (sales_data['Quarter'] < 12)].reset_index()
+# print(quarter1)
+# print(quarter2)
+# print(quarter3)
+# print(quarter4)
 
 
 
