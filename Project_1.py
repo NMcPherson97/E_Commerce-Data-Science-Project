@@ -15,7 +15,6 @@ sales_data['Profit_Margin'] = sales_data['Profit'] / sales_data['Sales']
 #Profit per unit column creation 
 sales_data['Profit_Per_Unit'] = sales_data['Profit'] / sales_data['Quantity']
 
-
 #date column conversion and quarter column creation 
 sales_data['Order Date'] = pd.to_datetime(sales_data['Order Date']) 
 sales_data['Quarter'] = sales_data['Order Date'].dt.quarter 
